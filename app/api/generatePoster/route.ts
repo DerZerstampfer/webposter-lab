@@ -5,7 +5,7 @@ import { z } from 'zod'
 export const dynamic = 'force-dynamic'
 
 const inputSchema = z.object({
-  url: z.string().url(),
+  url: z.string(),
 })
 
 export async function POST(req: NextRequest) {
