@@ -2,11 +2,11 @@
 
 import { cn } from '@/lib/utils'
 import { Sparkles } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from './ui/button'
 
-const getHostname = async (url: string) => {
-  if (!url) return undefined // return undefined for empty strings
+const getHostname = async (url: string, signal?: AbortSignal) => {
+  if (!url) return undefined
 
   const urlWithProtocol =
     url.startsWith('http://') || url.startsWith('https://')
@@ -14,7 +14,7 @@ const getHostname = async (url: string) => {
       : 'https://' + url
 
   try {
-    await fetch(urlWithProtocol, { mode: 'no-cors' })
+    await fetch(urlWithProtocol, { mode: 'no-cors', signal })
     const hostname = new URL(urlWithProtocol).hostname
     return hostname
   } catch (e) {
@@ -32,19 +32,27 @@ export const DomainInput = ({
   setUrl: (url: string) => void
 }) => {
   const [isValidUrl, setIsValidUrl] = useState(false)
+  const abortController = useRef(new AbortController())
 
   useEffect(() => {
     const checkUrl = async () => {
-      const hostname = await getHostname(url)
-      setIsValidUrl(hostname !== undefined)
+      const hostname = await getHostname(url, abortController.current.signal)
+      if (!abortController.current.signal.aborted) {
+        setIsValidUrl(hostname !== undefined)
+      }
     }
 
     checkUrl()
+
+    return () => {
+      abortController.current.abort()
+      abortController.current = new AbortController()
+    }
   }, [url])
 
   return (
     <form
-      className="flex rounded-xl border-2 border-input bg-background px-3 py-2"
+      className="flex rounded-xl border-2 border-input bg-background px-3 py-2 gap-2"
       onSubmit={async (e) => {
         e.preventDefault()
         const hostname = await getHostname(url)
