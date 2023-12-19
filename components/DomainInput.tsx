@@ -2,8 +2,25 @@
 
 import { cn } from '@/lib/utils'
 import { Sparkles } from 'lucide-react'
-import { useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from './ui/button'
+
+const getHostname = async (url: string) => {
+  if (!url) return undefined // return undefined for empty strings
+
+  const urlWithProtocol =
+    url.startsWith('http://') || url.startsWith('https://')
+      ? url
+      : 'https://' + url
+
+  try {
+    await fetch(urlWithProtocol, { mode: 'no-cors' })
+    const hostname = new URL(urlWithProtocol).hostname
+    return hostname
+  } catch (e) {
+    return undefined
+  }
+}
 
 export const DomainInput = ({
   handleGenerate,
@@ -14,23 +31,26 @@ export const DomainInput = ({
   url: string
   setUrl: (url: string) => void
 }) => {
-  const isValidUrl = useMemo(() => {
-    try {
-      if (!url.includes('.')) return false
-      new URL(`https://${url}`)
-      return true
-    } catch (e) {
-      return false
+  const [isValidUrl, setIsValidUrl] = useState(false)
+
+  useEffect(() => {
+    const checkUrl = async () => {
+      const hostname = await getHostname(url)
+      setIsValidUrl(hostname !== undefined)
     }
+
+    checkUrl()
   }, [url])
 
   return (
     <form
       className="flex rounded-xl border-2 border-input bg-background px-3 py-2"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault()
-        if (isValidUrl) {
-          handleGenerate(url)
+        const hostname = await getHostname(url)
+
+        if (hostname) {
+          handleGenerate(hostname)
         }
       }}
     >
@@ -38,7 +58,7 @@ export const DomainInput = ({
         className={cn(
           'flex h-12 w-full text-3xl bg-background placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a disabled:cursor-not-allowed disabled:opacity-50'
         )}
-        placeholder="example.com"
+        placeholder="yourwebsite.com"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
