@@ -4,6 +4,7 @@ import { useStringQueryParam } from '@/lib/useStringQueryParams'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { toast } from 'sonner'
 import { useOnClickOutside } from 'usehooks-ts'
 import { DomainInput } from './DomainInput'
 import { DownloadButton } from './DownloadButton'
@@ -47,6 +48,12 @@ export const Generator = () => {
     const imageUrl = resJson.url
 
     setImageUrl(imageUrl)
+
+    if (!imageUrl) {
+      toast.error(
+        'We couldnt generate a poster for this website. Please try another one.'
+      )
+    }
   }
 
   useOnClickOutside(imageRef, () => {
