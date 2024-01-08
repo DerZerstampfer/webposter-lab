@@ -18,9 +18,14 @@ export default function Home() {
           </div>
         </Link> */}
 
-        <Link href="/">
-          <div>Webposter</div>
-        </Link>
+        <div className="flex flex-col pt-6 md:gap-2 items-center">
+          <Link href="/">
+            <div className="font-mono text-4xl md:text-5xl">Webposter Lab</div>
+          </Link>
+          <span className="font-mono text-muted-foreground text-sm md:text-lg text-center">
+            Unique AI generated posters for any website
+          </span>
+        </div>
 
         <div className="flex-1 flex items-center">
           <Generator />
