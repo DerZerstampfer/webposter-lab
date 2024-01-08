@@ -18,7 +18,7 @@ export default function Home() {
           </div>
         </Link> */}
 
-        <div className="flex flex-col pt-6 md:gap-2 items-center">
+        <div className="flex flex-col pt-6 md:gap-1 items-center">
           <Link href="/">
             <div className="font-mono text-4xl md:text-5xl">Webposter Lab</div>
           </Link>
