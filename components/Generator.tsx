@@ -66,7 +66,7 @@ export const Generator = () => {
           </span>
         </div>
         <div className="max-w-md text-center text-muted-foreground">
-          This may take a while (about 2-3 minutes), please be patient. We
+          This may take a while (about 2 minutes), please be patient. We
           research your website and generate a custom poster for you.
         </div>
       </div>
