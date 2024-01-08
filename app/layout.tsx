@@ -19,7 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta property="og:image" content="/ogImage.png" />
+        <meta
+          property="og:image"
+          content="/newO
+        gImage.png"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://webposterlab.com/" />
       </head>
