@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a href="https://webposterlab.com">
+  <h1 align="center">Webposter Lab</h1>
+</a>
 
-## Getting Started
+<p align="center">
+  An open-source AI powered "Webposter" generator.
+</p>
 
-First, run the development server:
+# Introduction
+
+Webposter Lab is an free to use open-source Webposter generator powered by [Teampilot AI](https://teampilot.ai).
+Webposters are unique movie poster like posters themed to your website.
+
+# Examples
+
+<div style="display: flex; justify-content: space-between;">
+  <div style="width: 32%; text-align: center;">
+    <a href="https://astro.build" target="_blank">
+      <img src="https://webposter-lab.vercel.app/examples/astro-build.png" alt="Astro Build example" width="100%" />
+      <p>astro.build</p>
+    </a>
+  </div>
+  <div style="width: 32%; text-align: center;">
+    <a href="https://discord.com" target="_blank">
+      <img src="https://webposter-lab.vercel.app/examples/discord.png" alt="Discord example" width="100%" />
+      <p>discord.com</p>
+    </a>
+  </div>
+  <div style="width: 32%; text-align: center;">
+    <a href="https://unixtimestamp.com" target="_blank">
+      <img src="https://webposter-lab.vercel.app/examples/unixtimestamp.png" alt="Unix Timestamp example" width="100%" />
+      <p>unixtimestamp.com</p>
+    </a>
+  </div>
+</div>
+
+# Motivation
+
+Webposter Lab was created as a fun project to explore the possibilities of [Teampilot AI](https://teampilot.ai) as a Development Platform and to create something that is useful for the community.
+
+# Get it running locally
+
+Webposter Lab is a [Next.js](https://nextjs.org/) app. To get it running locally, clone the repository and install the dependencies with:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai) and create a new launchpad. You can then copy the launchpad ID and paste it into the `.env.local` file in the root directory of this repository (you have to create the file on your own).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# .env.local
+LAUNCHPAD_ID=YOUR_LAUNCHPAD_ID
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Launchpad configuration
 
-## Learn More
+Required Functions:
 
-To learn more about Next.js, take a look at the following resources:
+- Get all links from a Web Page
+- LLM on Website
+- DALL·E 3 Image Generator
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+At time of writing, some functions are in beta, so you might have to request beta access at https://teampilot.ai/start/beta if you aren't already in the beta.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+System Message: Can be found in the `system-message.txt` file in the root directory of this repository.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+In order to get the launchpad ID, make the launchpad public and copy the ID that is then displayed under ID. (Important, in order to work the launchpad has to be public so don't change it back to private)
