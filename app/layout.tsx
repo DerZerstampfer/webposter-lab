@@ -1,5 +1,4 @@
 import '@/app/globals.css'
-import { Providers } from '@/app/providers'
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -24,7 +23,7 @@ export default function RootLayout({
         <meta property="og:url" content="https://webposterlab.com/" />
       </head>
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        {children}
         <Toaster
           toastOptions={{
             duration: 10_000,
