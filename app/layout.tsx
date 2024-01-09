@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: 'https://webposterlab.com',
     title: 'Webposter Lab',
     description: 'Unique AI generated posters for any website',
-    images: ['https://webposterlab.com/newOgImage.png'],
+    images: ['/newOgImage.png'],
   },
 }
 
