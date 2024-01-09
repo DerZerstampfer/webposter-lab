@@ -44,7 +44,7 @@ Required Functions:
 - LLM on Website
 - DALL·E 3 Image Generator
 
-At time of writing, some functions are in beta, so you might have to request beta access at https://teampilot.ai/start/beta if you aren't already in the beta.
+At time of writing, some functions are in beta, so you might have to request beta access at https://teampilot.ai/start/beta if you can't find all functions.
 
 System Message: Can be found in the `system-message.txt` file in the root directory of this repository.
 
