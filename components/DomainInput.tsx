@@ -1,9 +1,9 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Sparkles } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { Button } from './ui/button'
 
 const getHostname = async (url: string, signal?: AbortSignal) => {
   if (!url) return undefined

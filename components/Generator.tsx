@@ -1,14 +1,14 @@
 'use client'
 
+import { DomainInput } from '@/components/DomainInput'
+import { DownloadButton } from '@/components/DownloadButton'
+import { Timer } from '@/components/Timer'
 import { useStringQueryParam } from '@/lib/useStringQueryParams'
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { useOnClickOutside } from 'usehooks-ts'
-import { DomainInput } from './DomainInput'
-import { DownloadButton } from './DownloadButton'
-import { Timer } from './Timer'
 
 export const Generator = () => {
   const imageRef = useRef(null)

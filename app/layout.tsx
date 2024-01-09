@@ -1,8 +1,8 @@
+import '@/app/globals.css'
+import { Providers } from '@/app/providers'
 import { Toaster } from '@/components/ui/sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
-import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,11 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta
-          property="og:image"
-          content="/newO
-        gImage.png"
-        />
+        <meta property="og:image" content="/newOgImage.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://webposterlab.com/" />
       </head>
