@@ -4,6 +4,8 @@ import { z } from 'zod'
 
 export const dynamic = 'force-dynamic'
 
+export const maxDuration = 300
+
 const inputSchema = z.object({
   url: z.string(),
 })
