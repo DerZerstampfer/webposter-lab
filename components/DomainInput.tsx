@@ -15,7 +15,11 @@ const getHostname = async (url: string, signal?: AbortSignal) => {
       : 'https://' + url
 
   try {
-    await fetch(urlWithProtocol, { mode: 'no-cors', signal })
+    await fetch(urlWithProtocol, {
+      mode: 'no-cors',
+      signal,
+      redirect: 'follow',
+    })
     const hostname = new URL(urlWithProtocol).hostname
     return hostname
   } catch (e) {
@@ -53,7 +57,7 @@ export const DomainInput = ({
 
   return (
     <form
-      className="flex rounded-xl border-2 border-input bg-background px-3 py-2 gap-2"
+      className="flex gap-2 rounded-xl border-2 border-input bg-background px-3 py-2"
       onSubmit={async (e) => {
         e.preventDefault()
         const hostname = await getHostname(url)
@@ -65,7 +69,7 @@ export const DomainInput = ({
     >
       <input
         className={cn(
-          'flex h-12 w-full text-3xl bg-background placeholder:text-muted-foreground/60 focus-visible:outline-none focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a disabled:cursor-not-allowed disabled:opacity-50'
+          'focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a flex h-12 w-full bg-background text-3xl placeholder:text-muted-foreground/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         )}
         placeholder="yourwebsite.com"
         value={url}
