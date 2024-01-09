@@ -1,9 +1,9 @@
-import { Generator } from '@/components/Generator'
-import Image from 'next/image'
-
 import { Github } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
-import BGImage from '../public/bg.png'
+
+import { Generator } from '@/components/Generator'
+import BGImage from '@/public/bg.png'
 
 export default function Home() {
   return (
