@@ -36,6 +36,12 @@ The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai
 LAUNCHPAD_ID=YOUR_LAUNCHPAD_ID
 ```
 
+You can then start the development server with:
+
+```bash
+npm run dev
+```
+
 ## Launchpad configuration
 
 Required Functions:
