@@ -97,7 +97,7 @@ export const Generator = () => {
                   little time. Afterwards, we use DALL·E 3 to create the poster,
                   which also needs its time. All these steps add up to about a
                   2-minute wait.
-                </p>{' '}
+                </p>
               </div>
             </HoverCardContent>
           </HoverCard>
