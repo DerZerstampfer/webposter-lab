@@ -9,6 +9,11 @@ import { useOnClickOutside } from 'usehooks-ts'
 import { DomainInput } from '@/components/DomainInput'
 import { DownloadButton } from '@/components/DownloadButton'
 import { Timer } from '@/components/Timer'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card'
 import { useStringQueryParam } from '@/lib/useStringQueryParams'
 
 export const Generator = () => {
@@ -74,8 +79,30 @@ export const Generator = () => {
           </span>
         </div>
         <div className="max-w-md text-center text-muted-foreground">
-          This may take a while (about 2 minutes), please be patient. We
-          research your website and generate a custom poster for you.
+          This may take a while (
+          <HoverCard>
+            <HoverCardTrigger>
+              <strong className="underline">about 2 minutes</strong>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-96">
+              <div className="flex flex-col gap-1 text-left">
+                <h4 className="text-lg font-semibold">
+                  Why does it take a bit?
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Here&apos;s the process: We start by visiting your website,
+                  studying not just the main page but sometimes also the linked
+                  pages. We focus exclusively on the text, ignoring images or
+                  videos. This information is run through a LLM which can take a
+                  little time. Afterwards, we use DALL·E 3 to create the poster,
+                  which also needs its time. All these steps add up to about a
+                  2-minute wait.
+                </p>{' '}
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+          ), please be patient. We research your website and generate a custom
+          poster for you.
         </div>
       </div>
     )
