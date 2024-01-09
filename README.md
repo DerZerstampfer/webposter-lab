@@ -13,26 +13,9 @@ Webposters are unique movie poster like posters themed to your website.
 
 # Examples
 
-<div style="display: flex; justify-content: space-between;">
-  <div style="width: 32%; text-align: center;">
-    <a href="https://astro.build" target="_blank">
-      <img src="https://webposter-lab.vercel.app/examples/astro-build.png" alt="Astro Build example" width="100%" />
-      <p>astro.build</p>
-    </a>
-  </div>
-  <div style="width: 32%; text-align: center;">
-    <a href="https://discord.com" target="_blank">
-      <img src="https://webposter-lab.vercel.app/examples/discord.png" alt="Discord example" width="100%" />
-      <p>discord.com</p>
-    </a>
-  </div>
-  <div style="width: 32%; text-align: center;">
-    <a href="https://unixtimestamp.com" target="_blank">
-      <img src="https://webposter-lab.vercel.app/examples/unixtimestamp.png" alt="Unix Timestamp example" width="100%" />
-      <p>unixtimestamp.com</p>
-    </a>
-  </div>
-</div>
+| [![Astro Build example](https://webposter-lab.vercel.app/examples/astro-build.png)](https://astro.build) | [![Discord example](https://webposter-lab.vercel.app/examples/discord.png)](https://discord.com) | [![Unix Timestamp example](https://webposter-lab.vercel.app/examples/unixtimestamp.png)](https://unixtimestamp.com) |
+| :------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
+|                                    [astro.build](https://astro.build)                                    |                                [discord.com](https://discord.com)                                |                                   [unixtimestamp.com](https://unixtimestamp.com)                                    |
 
 # Motivation
 
