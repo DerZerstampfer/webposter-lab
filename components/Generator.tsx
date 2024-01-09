@@ -45,14 +45,14 @@ export const Generator = () => {
     })
     setStartedGenerationAt(undefined)
 
-    const resJson = await res.json()
-    const imageUrl = resJson.url
+    try {
+      const resJson = await res.json()
+      const imageUrl = resJson.url
 
-    setImageUrl(imageUrl)
-
-    if (!imageUrl) {
+      setImageUrl(imageUrl)
+    } catch (error) {
       toast.error(
-        'We couldnt generate a poster for this website. Please try another one.'
+        'We couldnt generate a poster for this website. Please try another one.',
       )
     }
   }
@@ -82,24 +82,24 @@ export const Generator = () => {
   } else if (imageUrl) {
     return (
       <div
-        className="flex flex-col items-start justify-center gap-1 w-[85svw] max-w-[424px]"
+        className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1"
         ref={imageRef}
       >
-        <div className="flex justify-between w-full items-end gap-2">
-          <div className="tracking-tight truncate text-2xl" title={url}>
+        <div className="flex w-full items-end justify-between gap-2">
+          <div className="truncate text-2xl tracking-tight" title={url}>
             {url}
           </div>
 
           <a
             href="teampilot.ai"
             target="_blank"
-            className="text-muted-foreground text-sm whitespace-nowrap"
+            className="whitespace-nowrap text-sm text-muted-foreground"
           >
             Powered by teampilot.ai
           </a>
         </div>
-        <div className="rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3 w-full">
-          <div className="relative w-full aspect-[1024/1792]">
+        <div className="w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
+          <div className="relative aspect-[1024/1792] w-full">
             <div className="absolute bottom-2 right-2 z-10">
               <DownloadButton imageUrl={imageUrl} name={url} />
             </div>
