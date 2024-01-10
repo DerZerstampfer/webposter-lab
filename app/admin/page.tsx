@@ -33,7 +33,7 @@ export default async function Page({
   }
 
   return (
-    <main className="flex min-h-[100svh] flex-col items-center justify-around gap-4 px-4">
+    <main className="flex min-h-[100svh] flex-col items-center justify-around gap-4 px-4 py-6">
       <div>
         <div className="mb-8 flex flex-col gap-2">
           <h4 className="text-5xl font-semibold md:text-6xl">
