@@ -1,5 +1,6 @@
 import { Webposter } from '@/components/Webposter'
 import { prisma } from '@/lib/db'
+import { revalidateTag } from 'next/cache'
 import { notFound, redirect } from 'next/navigation'
 
 export default async function Page({
@@ -29,6 +30,7 @@ export default async function Page({
       data: { published: true },
     })
 
+    revalidateTag('latestWebposters')
     redirect(`/admin?secret=${formData.get('secret') as string}`)
   }
 
