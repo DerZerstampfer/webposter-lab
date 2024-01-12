@@ -2,6 +2,7 @@ import { Github } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { Explore } from '@/components/Explore'
 import { Generator } from '@/components/Generator'
 import BGImage from '@/public/bg.png'
 
@@ -21,9 +22,11 @@ export default function Home() {
           </span>
         </div>
 
-        <div className="flex flex-1 items-center">
+        <div className="flex min-h-[70svh] flex-1 items-center">
           <Generator />
         </div>
+
+        <Explore />
 
         <footer className="flex w-full flex-col justify-end py-6">
           <div className="container mx-auto flex items-center justify-between p-0">

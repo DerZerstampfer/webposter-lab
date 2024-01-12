@@ -109,7 +109,7 @@ export const Generator = () => {
   } else if (imageUrl) {
     return (
       <div
-        className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1"
+        className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10"
         ref={imageRef}
       >
         <div className="flex w-full items-end justify-between gap-2">

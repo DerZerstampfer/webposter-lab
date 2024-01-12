@@ -1,3 +1,4 @@
+import { prisma } from '@/lib/db'
 import { fetchTeampilot } from '@teampilot/sdk'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
@@ -23,9 +24,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.error()
   }
 
-  const image = data.mediaAttachments?.[0]?.url
+  const imageUrl = data.mediaAttachments?.[0]?.url
+
+  if (imageUrl) {
+    // It isn't too important that it lands in the db, so if it fails to create don't return an error
+    try {
+      await prisma.webposter.create({
+        data: {
+          url: url,
+          imageUrl: imageUrl,
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return NextResponse.json({
-    url: image,
+    url: imageUrl,
   })
 }
