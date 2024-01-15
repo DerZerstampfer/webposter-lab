@@ -7,7 +7,22 @@ import { Providers } from '@/app/providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://webposterlab.com'),
   title: 'Webposter Lab',
+  description: 'Open Source AI web poster generator for any website',
+  openGraph: {
+    title: 'Webposter Lab',
+    description: 'Open Source AI web poster generator for any website',
+    url: 'https://webposterlab.com',
+    siteName: 'webposterlab.com',
+    images: ['https://webposterlab.com/newOgImage.png'],
+  },
+  twitter: {
+    title: 'Webposter Lab',
+    card: 'summary_large_image',
+    images: ['https://webposterlab.com/newOgImage.png'],
+    creator: '@paukraft',
+  },
 }
 
 export default function RootLayout({
@@ -17,34 +32,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <meta
-          name="description"
-          content="Unique AI generated posters tailored to any website with Webposter Lab"
-        />
-        <meta
-          property="og:title"
-          content="Webposter Lab - Unique AI generated posters for any website"
-        />
-        <meta
-          property="og:description"
-          content="Unique AI generated posters tailored to any website with Webposter Lab"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://webposterlab.com" />
-        <meta property="og:image" content="/newOgImage.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@paukraft" />
-        <meta
-          name="twitter:title"
-          content="Webposter Lab - Unique AI generated posters for any website"
-        />
-        <meta
-          name="twitter:description"
-          content="Unique AI generated posters tailored to any website with Webposter Lab"
-        />
-        <meta name="twitter:image" content="/newOgImage.png" />
-      </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
