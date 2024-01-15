@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const getHostname = async (url: string, signal?: AbortSignal) => {
   if (!url) return undefined
@@ -56,28 +58,45 @@ export const DomainInput = ({
   }, [url])
 
   return (
-    <form
-      className="flex gap-2 rounded-xl border-2 border-input bg-background px-3 py-2"
-      onSubmit={async (e) => {
-        e.preventDefault()
-        const hostname = await getHostname(url)
+    <div className="flex flex-col items-center gap-4">
+      <form
+        className="flex gap-2 rounded-xl border-2 border-input bg-background px-3 py-2"
+        onSubmit={async (e) => {
+          e.preventDefault()
+          const hostname = await getHostname(url)
 
-        if (hostname) {
-          handleGenerate(hostname)
-        }
-      }}
-    >
-      <input
-        className={cn(
-          'focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a flex h-12 w-full bg-background text-3xl placeholder:text-muted-foreground/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-        )}
-        placeholder="yourwebsite.com"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <Button size="icon" className="h-12 w-12" disabled={!isValidUrl}>
-        <Sparkles />
-      </Button>
-    </form>
+          if (hostname) {
+            handleGenerate(hostname)
+          }
+        }}
+      >
+        <input
+          className={cn(
+            'focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a flex h-12 w-full bg-background text-3xl placeholder:text-muted-foreground/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+          )}
+          placeholder="Enter URL"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <Button size="icon" className="h-12 w-12" disabled={!isValidUrl}>
+          <Sparkles />
+        </Button>
+      </form>
+      <Link
+        href="https://teampilot.ai/"
+        className="flex items-end gap-1 text-sm text-gray-500 hover:underline"
+        target={'_blank'}
+      >
+        <Image
+          src={'https://teampilot.ai/favicon-white.svg'}
+          className="h-5 w-5"
+          alt="logo"
+          width={32}
+          height={32}
+        />
+        <span className="max-sm:hidden">Powered by Teampilot AI</span>
+        <span className="sm:hidden">Teampilot AI</span>
+      </Link>
+    </div>
   )
 }
