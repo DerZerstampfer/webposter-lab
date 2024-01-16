@@ -26,6 +26,8 @@ export async function generateMetadata(
   props: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
+  if (!process.env.DATABASE_URL) return {}
+
   const url = getUrl(props)
 
   const previousImages = (await parent).openGraph?.images || []
@@ -69,8 +71,10 @@ export async function generateMetadata(
 
 const getMovieposter = unstable_cache(
   async (url?: string) => {
+    if (!process.env.DATABASE_URL) return null
+
     if (!url) {
-      return
+      return null
     }
 
     const webposter = await prisma.webposter.findUnique({
@@ -112,8 +116,7 @@ export default async function Home(props: Props) {
           />
         </div>
 
-        <Explore />
-
+        {!!process.env.DATABASE_URL && <Explore />}
         <footer className="flex w-full flex-col justify-end py-6">
           <div className="container mx-auto flex items-center justify-between p-0">
             <Link
