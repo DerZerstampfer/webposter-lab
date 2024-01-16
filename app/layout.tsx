@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: 'webposterlab.com',
     images: [
       {
-        url: 'https://webposterlab.com/newOgImage.png',
+        url: 'https://webposterlab.com/newOgImage.webp',
         width: 1792,
         height: 1024,
       },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Webposter Lab',
     card: 'summary_large_image',
-    images: ['https://webposterlab.com/newOgImage.png'],
+    images: ['https://webposterlab.com/newOgImage.webp'],
     creator: '@paukraft',
   },
 }

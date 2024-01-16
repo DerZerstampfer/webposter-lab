@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Explore } from '@/components/Explore'
 import { Generator } from '@/components/Generator'
 import { prisma } from '@/lib/db'
-import BGImage from '@/public/bg.png'
+import BGImage from '@/public/bg.webp'
 import { Metadata, ResolvingMetadata } from 'next'
 import { unstable_cache } from 'next/cache'
 

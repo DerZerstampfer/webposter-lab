@@ -13,9 +13,9 @@ Webposters are unique movie poster like posters themed to your website.
 
 # Examples
 
-| [![Astro Build example](https://webposter-lab.vercel.app/examples/astro-build.png)](https://astro.build) | [![Discord example](https://webposter-lab.vercel.app/examples/discord.png)](https://discord.com) | [![Sodefa example](https://webposter-lab.vercel.app/examples/sodefa.png)](https://sodefa.de) |
-| :------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: |
-|                                    [astro.build](https://astro.build)                                    |                                [discord.com](https://discord.com)                                |                                [sodefa.de](https://sodefa.de)                                |
+| [![Astro Build example](https://webposterlab.com/examples/astro-build.webp)](https://astro.build) | [![Discord example](https://webposterlab.com/examples/discord.webp)](https://discord.com) | [![Sodefa example](https://webposterlab.com/examples/sodefa.webp)](https://sodefa.de) |
+| :-----------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+|                                [astro.build](https://astro.build)                                 |                            [discord.com](https://discord.com)                             |                            [sodefa.de](https://sodefa.de)                             |
 
 # Motivation
 
