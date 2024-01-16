@@ -36,7 +36,11 @@ export async function POST(req: NextRequest) {
         },
       })
     } catch (error) {
-      console.error(error)
+      if (!!process.env.DATABASE_URL) {
+        console.log('No database connection - skipping saving to database')
+      } else {
+        console.error(error)
+      }
     }
   }
 
