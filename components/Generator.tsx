@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useMemo, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 import { DomainInput } from '@/components/DomainInput'
@@ -29,22 +29,18 @@ export const Generator = ({
     Date | undefined
   >()
 
-  const isGenerating = useMemo(() => {
-    return startedGenerationAt
-  }, [startedGenerationAt])
-
   const [url, setUrl] = useState(paramUrl ?? '')
 
   const router = useRouter()
 
   const handleGenerate = async (url: string) => {
-    router.push(`/${url}`)
     setStartedGenerationAt(new Date())
     const res = await fetch('/api/generatePoster', {
       method: 'POST',
       body: JSON.stringify({ url }),
     })
     setStartedGenerationAt(undefined)
+    router.push(`/${url}`)
 
     try {
       const resJson = await res.json()
@@ -58,13 +54,13 @@ export const Generator = ({
     }
   }
 
-  if (isGenerating) {
+  if (startedGenerationAt) {
     return (
       <div className="flex flex-col items-center justify-center gap-2">
         <div className="text-4xl font-bold tracking-tight">
           Generating...
           <span className="pl-5 text-muted-foreground">
-            <Timer date={new Date(startedGenerationAt || 0)} />
+            <Timer date={startedGenerationAt} />
           </span>
         </div>
         <div className="max-w-md text-center text-muted-foreground">
@@ -114,7 +110,7 @@ export const Generator = ({
             Powered by teampilot.ai
           </a>
         </div>
-        <div className="w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
+        <div className="mb-3 w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
           <div className="relative aspect-[1024/1792] w-full">
             <div className="absolute bottom-2 right-2 z-10 space-x-2">
               <ShareButton url={url} />
@@ -137,9 +133,9 @@ export const Generator = ({
               setUrl('')
               router.push('/')
             }}
-            className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-2 ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
+            className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-1 px-2 text-sm ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
           >
-            <RotateCcw className="h-4 w-4" />
+            <RotateCcw className="h-3 w-3" />
             Generate more
           </button>
         </div>

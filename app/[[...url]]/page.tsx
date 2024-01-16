@@ -117,6 +117,7 @@ export default async function Home(props: Props) {
         </div>
 
         {!!process.env.DATABASE_URL && <Explore />}
+
         <footer className="flex w-full flex-col justify-end py-6">
           <div className="container mx-auto flex items-center justify-between p-0">
             <Link
