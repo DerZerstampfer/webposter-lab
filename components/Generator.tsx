@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { useOnClickOutside } from 'usehooks-ts'
 
@@ -14,6 +14,7 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 import { useStringQueryParam } from '@/lib/useStringQueryParams'
+import { useSearchParams } from 'next/navigation'
 
 export const Generator = ({
   cachedImageUrl,
@@ -33,6 +34,21 @@ export const Generator = ({
   }, [startedGenerationAt])
 
   const [url, setUrl] = useState(searchParamUrl ?? '')
+
+  const searchParams = useSearchParams()
+
+  useEffect(
+    () => {
+      const newUrl = searchParams.get('url')
+      console.log({ newUrl, url })
+      if (searchParams && newUrl !== url) {
+        setUrl(newUrl ?? '')
+        setImageUrl(undefined)
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchParams],
+  )
 
   const { setValue: setUrlParam } = useStringQueryParam('url')
 
