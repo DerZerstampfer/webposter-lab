@@ -107,7 +107,7 @@ export const Generator = ({
           </div>
 
           <a
-            href="teampilot.ai"
+            href="https://teampilot.ai/"
             target="_blank"
             className="whitespace-nowrap text-sm text-muted-foreground"
           >
