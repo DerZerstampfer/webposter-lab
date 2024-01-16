@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
-import { useOnClickOutside } from 'usehooks-ts'
 
 import { DomainInput } from '@/components/DomainInput'
 import { DownloadButton } from '@/components/DownloadButton'
@@ -14,6 +13,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
+import { RotateCcw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export const Generator = ({
@@ -57,13 +57,6 @@ export const Generator = ({
       )
     }
   }
-
-  useOnClickOutside(imageRef, () => {
-    setImageUrl(undefined)
-    setStartedGenerationAt(undefined)
-    setUrl('')
-    router.push('/')
-  })
 
   if (isGenerating) {
     return (
@@ -135,6 +128,20 @@ export const Generator = ({
               unoptimized
             />
           </div>
+        </div>
+        <div className="flex w-full justify-center">
+          <button
+            onClick={() => {
+              setImageUrl(undefined)
+              setStartedGenerationAt(undefined)
+              setUrl('')
+              router.push('/')
+            }}
+            className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-2 ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
+          >
+            <RotateCcw className="h-4 w-4" />
+            Generate more
+          </button>
         </div>
       </div>
     )
