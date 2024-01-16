@@ -4,7 +4,53 @@ import Link from 'next/link'
 
 import { Explore } from '@/components/Explore'
 import { Generator } from '@/components/Generator'
+import { prisma } from '@/lib/db'
 import BGImage from '@/public/bg.png'
+import { Metadata, ResolvingMetadata } from 'next'
+
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+  { searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const url = searchParams?.url as string
+
+  if (!url) {
+    return {}
+  }
+
+  const webposter = await prisma.webposter.findUnique({
+    where: { url },
+    select: {
+      imageUrl: true,
+    },
+  })
+
+  if (!webposter) {
+    return {}
+  }
+
+  const description = `Webposter for ${url} - By Webposter Lab`
+
+  return {
+    description: description,
+    openGraph: {
+      images: [webposter.imageUrl],
+      url: `https://webposterlab.com/?url=${url}`,
+      description: description,
+    },
+    twitter: {
+      title: 'Webposter Lab',
+      description: description,
+      card: 'summary_large_image',
+      images: [webposter.imageUrl],
+      creator: '@paukraft',
+    },
+  }
+}
 
 export default function Home() {
   return (
