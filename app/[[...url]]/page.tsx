@@ -49,7 +49,7 @@ export async function generateMetadata(
     description: description,
     openGraph: {
       images: [webposter.imageUrl],
-      url: `https://webposterlab.com/?url=${url}`,
+      url: `https://webposterlab.com/${url}`,
       description: description,
     },
     twitter: {
