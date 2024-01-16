@@ -1,6 +1,7 @@
 import { Webposter } from '@/components/Webposter'
 import { prisma } from '@/lib/db'
 import { unstable_cache } from 'next/cache'
+import Link from 'next/link'
 
 const getLatestMovieposters = unstable_cache(
   async () => {
@@ -35,7 +36,9 @@ export const Explore = async () => {
       </div>
       <div className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 md:gap-y-10 lg:grid-cols-4">
         {webposters.map((webposter) => (
-          <Webposter key={webposter.id} webposter={webposter} />
+          <Link href={`/${webposter.url}`} key={webposter.id}>
+            <Webposter webposter={webposter} />
+          </Link>
         ))}
       </div>
     </div>

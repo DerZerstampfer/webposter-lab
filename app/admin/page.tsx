@@ -55,7 +55,7 @@ export default async function Page({
                 value={searchParams['secret']}
               />
               <button type="submit">
-                <Webposter webposter={webposter} />
+                <Webposter webposter={webposter} unoptimized />
               </button>
             </form>
           ))}
