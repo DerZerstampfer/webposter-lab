@@ -27,18 +27,18 @@ export async function POST(req: NextRequest) {
   const imageUrl = data.mediaAttachments?.[0]?.url
 
   if (imageUrl) {
-    // It isn't too important that it lands in the db, so if it fails to create don't return an error
-    try {
-      await prisma.webposter.create({
-        data: {
-          url: url,
-          imageUrl: imageUrl,
-        },
-      })
-    } catch (error) {
-      if (!!process.env.DATABASE_URL) {
-        console.log('No database connection - skipping saving to database')
-      } else {
+    if (!process.env.DATABASE_URL) {
+      console.log('No database connection - skipping saving to database')
+    } else {
+      // It isn't too important that it lands in the db, so if it fails to create don't return an error
+      try {
+        await prisma.webposter.create({
+          data: {
+            url: url,
+            imageUrl: imageUrl,
+          },
+        })
+      } catch (error) {
         console.error(error)
       }
     }
