@@ -19,6 +19,4 @@ model Webposter {
 
   featured  Boolean @default(false)
   published Boolean @default(false)
-
-  @@index([url, featured, published, createdAt])
 }
