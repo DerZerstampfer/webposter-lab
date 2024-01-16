@@ -10,14 +10,23 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { unstable_cache } from 'next/cache'
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: {
+    url?: string[]
+  }
+}
+
+const getUrl = (props: Props) => {
+  const paramUrl =
+    props.params?.url && (props.params?.url[0] as string | undefined)
+
+  return paramUrl
 }
 
 export async function generateMetadata(
-  { searchParams }: Props,
+  props: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const url = searchParams?.url as string
+  const url = getUrl(props)
 
   if (!url) {
     return {}
@@ -54,7 +63,11 @@ export async function generateMetadata(
 }
 
 const getMovieposter = unstable_cache(
-  async (url: string) => {
+  async (url?: string) => {
+    if (!url) {
+      return
+    }
+
     const webposter = await prisma.webposter.findUnique({
       where: {
         url,
@@ -69,7 +82,7 @@ const getMovieposter = unstable_cache(
   },
 )
 
-export default async function Home({ searchParams }: Props) {
+export default async function Home(props: Props) {
   return (
     <>
       <div className="fixed -z-10 h-screen w-screen opacity-10">
@@ -88,10 +101,9 @@ export default async function Home({ searchParams }: Props) {
         <div className="flex min-h-[70svh] flex-1 items-center">
           <Generator
             cachedImageUrl={
-              searchParams?.url &&
-              (await getMovieposter(searchParams.url as string))?.imageUrl
+              getUrl(props) && (await getMovieposter(getUrl(props)))?.imageUrl
             }
-            searchParamUrl={searchParams?.url as string}
+            paramUrl={getUrl(props)}
           />
         </div>
 

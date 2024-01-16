@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { useOnClickOutside } from 'usehooks-ts'
 
@@ -13,15 +13,14 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { useStringQueryParam } from '@/lib/useStringQueryParams'
-import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export const Generator = ({
   cachedImageUrl,
-  searchParamUrl,
+  paramUrl,
 }: {
   cachedImageUrl?: string
-  searchParamUrl?: string
+  paramUrl?: string
 }) => {
   const imageRef = useRef(null)
   const [imageUrl, setImageUrl] = useState(cachedImageUrl)
@@ -33,26 +32,12 @@ export const Generator = ({
     return startedGenerationAt
   }, [startedGenerationAt])
 
-  const [url, setUrl] = useState(searchParamUrl ?? '')
+  const [url, setUrl] = useState(paramUrl ?? '')
 
-  const searchParams = useSearchParams()
-
-  useEffect(
-    () => {
-      const newUrl = searchParams.get('url')
-      if (searchParams && newUrl !== url) {
-        setUrl(newUrl ?? '')
-        setImageUrl(undefined)
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchParams],
-  )
-
-  const { setValue: setUrlParam } = useStringQueryParam('url')
+  const router = useRouter()
 
   const handleGenerate = async (url: string) => {
-    setUrlParam(url)
+    router.push(`/${url}`)
     setStartedGenerationAt(new Date())
     const res = await fetch('/api/generatePoster', {
       method: 'POST',
@@ -75,8 +60,8 @@ export const Generator = ({
   useOnClickOutside(imageRef, () => {
     setImageUrl(undefined)
     setStartedGenerationAt(undefined)
-    setUrlParam('')
     setUrl('')
+    router.push('/')
   })
 
   if (isGenerating) {
