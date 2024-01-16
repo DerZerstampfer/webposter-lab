@@ -40,7 +40,6 @@ export const Generator = ({
   useEffect(
     () => {
       const newUrl = searchParams.get('url')
-      console.log({ newUrl, url })
       if (searchParams && newUrl !== url) {
         setUrl(newUrl ?? '')
         setImageUrl(undefined)
