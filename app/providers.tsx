@@ -7,9 +7,12 @@ type Props = {
   children?: React.ReactNode
 }
 
-const Toaster = dynamic(() => import('sonner').then((m) => m.Toaster), {
-  ssr: false,
-})
+const Toaster = dynamic(
+  () => import('@/components/ui/sonner').then((m) => m.Toaster),
+  {
+    ssr: false,
+  },
+)
 
 export const Providers = ({ children }: Props) => {
   return (

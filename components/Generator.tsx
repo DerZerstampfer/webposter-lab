@@ -7,6 +7,7 @@ import { useOnClickOutside } from 'usehooks-ts'
 
 import { DomainInput } from '@/components/DomainInput'
 import { DownloadButton } from '@/components/DownloadButton'
+import { ShareButton } from '@/components/ShareButton'
 import { Timer } from '@/components/Timer'
 import {
   HoverCard,
@@ -122,7 +123,8 @@ export const Generator = ({
         </div>
         <div className="w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
           <div className="relative aspect-[1024/1792] w-full">
-            <div className="absolute bottom-2 right-2 z-10">
+            <div className="absolute bottom-2 right-2 z-10 space-x-2">
+              <ShareButton url={url} />
               <DownloadButton imageUrl={imageUrl} name={url} />
             </div>
             <Image
