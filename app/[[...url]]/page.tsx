@@ -50,7 +50,10 @@ export async function generateMetadata(
   return {
     description: description,
     openGraph: {
-      images: [webposter.imageUrl, ...previousImages],
+      images: [
+        { url: webposter.imageUrl, width: 1024, height: 1792 },
+        ...previousImages,
+      ],
       url: `https://webposterlab.com/${url}`,
       description: description,
     },

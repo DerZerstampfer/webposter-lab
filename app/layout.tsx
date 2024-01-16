@@ -15,7 +15,13 @@ export const metadata: Metadata = {
     description: 'Open Source AI web poster generator for any website',
     url: 'https://webposterlab.com',
     siteName: 'webposterlab.com',
-    images: ['https://webposterlab.com/newOgImage.png'],
+    images: [
+      {
+        url: 'https://webposterlab.com/newOgImage.png',
+        width: 1792,
+        height: 1024,
+      },
+    ],
   },
   twitter: {
     title: 'Webposter Lab',
