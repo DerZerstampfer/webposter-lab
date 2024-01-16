@@ -7,6 +7,7 @@ import { Generator } from '@/components/Generator'
 import { prisma } from '@/lib/db'
 import BGImage from '@/public/bg.png'
 import { Metadata, ResolvingMetadata } from 'next'
+import { unstable_cache } from 'next/cache'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -52,7 +53,23 @@ export async function generateMetadata(
   }
 }
 
-export default function Home() {
+export const getMovieposter = unstable_cache(
+  async (url: string) => {
+    const webposter = await prisma.webposter.findUnique({
+      where: {
+        url,
+      },
+    })
+    return webposter
+  },
+  ['getMovieposter'],
+  {
+    revalidate: 60,
+    tags: ['getMovieposter'],
+  },
+)
+
+export default async function Home({ searchParams }: Props) {
   return (
     <>
       <div className="fixed -z-10 h-screen w-screen opacity-10">
@@ -69,7 +86,13 @@ export default function Home() {
         </div>
 
         <div className="flex min-h-[70svh] flex-1 items-center">
-          <Generator />
+          <Generator
+            cachedImageUrl={
+              searchParams?.url &&
+              (await getMovieposter(searchParams.url as string))?.imageUrl
+            }
+            searchParamUrl={searchParams?.url as string}
+          />
         </div>
 
         <Explore />
