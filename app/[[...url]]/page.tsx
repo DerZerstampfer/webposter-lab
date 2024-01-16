@@ -19,7 +19,7 @@ const getUrl = (props: Props) => {
   const paramUrl =
     props.params?.url && (props.params?.url[0] as string | undefined)
 
-  return paramUrl
+  return paramUrl !== 'index' ? paramUrl : undefined
 }
 
 export async function generateMetadata(
