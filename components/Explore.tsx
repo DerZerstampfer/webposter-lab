@@ -2,7 +2,7 @@ import { Webposter } from '@/components/Webposter'
 import { prisma } from '@/lib/db'
 import { unstable_cache } from 'next/cache'
 
-export const getLatestMovieposters = unstable_cache(
+const getLatestMovieposters = unstable_cache(
   async () => {
     const webposters = await prisma.webposter.findMany({
       where: {

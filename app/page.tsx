@@ -53,7 +53,7 @@ export async function generateMetadata(
   }
 }
 
-export const getMovieposter = unstable_cache(
+const getMovieposter = unstable_cache(
   async (url: string) => {
     const webposter = await prisma.webposter.findUnique({
       where: {
