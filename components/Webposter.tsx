@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export const Webposter = ({ webposter }: { webposter: WebposterType }) => {
   return (
-    <div className="group relative flex max-w-full flex-col items-center gap-2 overflow-hidden duration-100 hover:scale-105 hover:drop-shadow-md max-sm:flex-col-reverse sm:gap-1.5">
+    <div className="group relative flex max-w-full flex-col items-center gap-2 duration-100 hover:scale-105 hover:drop-shadow-md max-sm:flex-col-reverse sm:gap-1.5">
       <Image
         src={webposter.imageUrl}
         alt={webposter.url}
