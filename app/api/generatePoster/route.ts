@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
   const data = await fetchTeampilot({
     launchpadSlugId: process.env.LAUNCHPAD_ID,
     message: url,
+    cacheTtlSeconds: 'forever',
   })
 
   if (data.mediaAttachments?.length === 0) {
