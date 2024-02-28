@@ -38,6 +38,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          async
+          defer
+          data-website-id={process.env.UMAMI_WEBSITE_ID}
+          src={process.env.UMAMI_URL}
+        ></script>
+      </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>
