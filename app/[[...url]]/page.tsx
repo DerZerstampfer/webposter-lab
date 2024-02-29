@@ -30,8 +30,6 @@ export async function generateMetadata(
 
   const url = getUrl(props)
 
-  const previousImages = (await parent).openGraph?.images || []
-
   if (!url) {
     return {}
   }
@@ -52,10 +50,7 @@ export async function generateMetadata(
   return {
     description: description,
     openGraph: {
-      images: [
-        { url: webposter.imageUrl, width: 1024, height: 1792 },
-        ...previousImages,
-      ],
+      images: [{ url: webposter.imageUrl, width: 1024, height: 1792 }],
       url: `https://webposterlab.com/${url}`,
       description: description,
     },
