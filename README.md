@@ -29,7 +29,7 @@ Webposter Lab is a [Next.js](https://nextjs.org/) app. To get it running locally
 npm install
 ```
 
-The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai) and copy the launchpad [here](https://teampilot.ai/copy/webposter-generator-447ed332ce54fc588f4a558eaac4e469).
+The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai) and copy the launchpad [here](https://teampilot.ai/copy/webposter-generator-447ed332ce54fc588f4a558eaac4e469). Then make the launchpad public, safe the launchpad and copy the Launchpad ID in you env file.
 
 ```bash
 # .env.local
@@ -40,6 +40,22 @@ You can then start the development server with:
 
 ```bash
 npm run dev
+```
+
+If you want the database features (explore section on the landing page, og images, etc.) to work, you need to set up prisma. The current schema.prisma file is set up to use a mysql database. You can change the database settings in the schema.prisma file, follow the prisma documentation to do that.
+
+If you want to stick to mysql you can then simply add you DATABASE_URL to you env file.
+
+```bash
+# .env.local
+DATABASE_URL=YOUR_DATABASE_URL
+```
+
+Webposters are jsut shown in the explore section if they are in the database and if the have been accepted by you. You can accept webposters at the /admin page. To access that page you need a secter which you can set to whatever you want in the env file. You can then access the admin page at /admin?secret=YOUR_SECRET.
+
+```bash
+# .env.local
+ADMIN_SECRET=YOUR_SECRET
 ```
 
 ## Launchpad configuration
