@@ -42,20 +42,20 @@ You can then start the development server with:
 npm run dev
 ```
 
-If you want the database features (explore section on the landing page, og images, etc.) to work, you need to set up prisma. The current schema.prisma file is set up to use a mysql database. You can change the database settings in the schema.prisma file, follow the prisma documentation to do that.
+If you want to leverage the database features, such as the explore section on the landing page and og images, you'll need to set up Prisma. The existing schema.prisma file is already configured to work with a MySQL database. However, if you want to use a different database, you can modify the settings in the schema.prisma file. For guidance on this, please refer to the [Prisma documentation](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-postgresql).
 
-If you want to stick to mysql you can then simply add you DATABASE_URL to you env file.
+If you want to continue with MySQL, just add your DATABASE_URL to your env file as follows:
 
 ```bash
 # .env.local
 DATABASE_URL=YOUR_DATABASE_URL
 ```
 
-Webposters are jsut shown in the explore section if they are in the database and if the have been accepted by you. You can accept webposters at the /admin page. To access that page you need a secter which you can set to whatever you want in the env file. You can then access the admin page at /admin?secret=YOUR_SECRET.
+Webposters will only appear in the explore section if they have been stored in the database and approved by you. You can approve webposters in the /admin page. To access this page, you'll need a secret key, which can be any string you choose. Add this secret key to your env file. Afterwards, you can access the admin page at /admin?secret=YOUR_SECRET.
 
 ```bash
 # .env.local
-ADMIN_SECRET=YOUR_SECRET
+ADMIN_SECRET=MY_SUPER_SECURE_SECRET_KEY
 ```
 
 ## Launchpad configuration
