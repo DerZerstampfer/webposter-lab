@@ -29,7 +29,7 @@ Webposter Lab is a [Next.js](https://nextjs.org/) app. To get it running locally
 npm install
 ```
 
-The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai) and create a new launchpad. You can then copy the launchpad ID and paste it into the `.env.local` file in the root directory of this repository (you have to create the file on your own).
+The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai) and copy the launchpad [here](https://teampilot.ai/copy/webposter-generator-447ed332ce54fc588f4a558eaac4e469).
 
 ```bash
 # .env.local
