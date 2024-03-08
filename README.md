@@ -42,14 +42,21 @@ You can then start the development server with:
 npm run dev
 ```
 
-If you want to leverage the database features, such as the explore section on the landing page and og images, you'll need to set up Prisma. The existing schema.prisma file is already configured to work with a MySQL database. However, if you want to use a different database, you can modify the settings in the schema.prisma file. For guidance on this, please refer to the [Prisma documentation](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-postgresql).
+# Database Configuration
 
-If you want to continue with MySQL, just add your DATABASE_URL to your env file as follows:
+This project uses SQLite hosted on Turso. If you want to leverage database features such as the explore section on the landing page and og images, you'll need to set up Prisma. The existing `schema.prisma` file is already configured to work with SQLite.
+
+To set up the database, add your Turso database URL and Turso authentication token to your environment file as follows:
 
 ```bash
 # .env.local
-DATABASE_URL=YOUR_DATABASE_URL
+TURSO_DATABASE_URL=YOUR_TURSO_DATABASE_URL
+TURSO_AUTH_TOKEN=YOUR_TURSO_AUTH_TOKEN
 ```
+
+A detailed guide on how to set up Prisma with SQLite on Turso can be found at https://www.prisma.io/docs/orm/overview/databases/turso
+
+You can easily switch to any other database by modifying the settings in the `schema.prisma` and `db.ts` files.
 
 Webposters will only appear in the explore section if they have been stored in the database and approved by you. You can approve webposters in the /admin page. To access this page, you'll need a secret key, which can be any string you choose. Add this secret key to your env file. Afterwards, you can access the admin page at /admin?secret=YOUR_SECRET.
 

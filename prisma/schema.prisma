@@ -2,20 +2,20 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Webposter {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   url       String   @unique
-  imageUrl  String   @db.MediumText
+  imageUrl  String
 
   featured  Boolean @default(false)
   published Boolean @default(false)
