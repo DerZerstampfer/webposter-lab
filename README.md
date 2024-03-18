@@ -64,17 +64,3 @@ Webposters will only appear in the explore section if they have been stored in t
 # .env.local
 ADMIN_SECRET=MY_SUPER_SECURE_SECRET_KEY
 ```
-
-## Launchpad configuration
-
-Required Functions:
-
-- Get all links from a Web Page
-- LLM on Website
-- DALL·E 3 Image Generator
-
-At time of writing, some functions are in beta, so you might have to request beta access at https://teampilot.ai/start/beta if you can't find all functions.
-
-System Message: Can be found in the `system-message.txt` file in the root directory of this repository.
-
-In order to get the launchpad ID, make the launchpad public and copy the ID that is then displayed under ID. (Important, in order to work the launchpad has to be public so don't change it back to private)
