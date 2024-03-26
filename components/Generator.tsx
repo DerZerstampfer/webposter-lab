@@ -49,7 +49,7 @@ export const Generator = ({
       setImageUrl(imageUrl)
     } catch (error) {
       toast.error(
-        'We couldnt generate a poster for this website. Please try another one. This is likely due to the website needing javascript to render.'
+        "We couldn't generate a poster for this website. This is likely due to the website needing javascript to render. Please try another one."
       )
     }
   }
