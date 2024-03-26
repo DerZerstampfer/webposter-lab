@@ -36,6 +36,8 @@ The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai
 LAUNCHPAD_ID=YOUR_LAUNCHPAD_ID
 ```
 
+If you want to know more about how to use the Teampilot SDK and how Teampilot works, head to the [Teampilot AI Documentation](https://docs.teampilot.ai/).
+
 You can then start the development server with:
 
 ```bash
