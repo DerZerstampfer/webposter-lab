@@ -15,6 +15,18 @@ export async function POST(req: NextRequest) {
   const body = await req.json()
   const { url } = inputSchema.parse(body)
 
+  const existingWebposter = await prisma.webposter.findUnique({
+    where: {
+      url,
+    },
+  })
+
+  if (existingWebposter) {
+    return NextResponse.json({
+      url: existingWebposter.imageUrl,
+    })
+  }
+
   const data = await fetchTeampilot({
     launchpadSlugId: process.env.LAUNCHPAD_ID,
     message: url,
