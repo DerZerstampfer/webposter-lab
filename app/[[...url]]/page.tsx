@@ -15,7 +15,7 @@ type Props = {
   }
 }
 
-const getUrl = (props: Props) => {
+const getUrlFromProps = (props: Props) => {
   const paramUrl =
     props.params?.url && (props.params?.url[0] as string | undefined)
 
@@ -24,11 +24,11 @@ const getUrl = (props: Props) => {
 
 export async function generateMetadata(
   props: Props,
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   if (!process.env.DATABASE_URL) return {}
 
-  const url = getUrl(props)
+  const url = getUrlFromProps(props)
 
   if (!url) {
     return {}
@@ -64,7 +64,7 @@ export async function generateMetadata(
   }
 }
 
-const getMovieposter = unstable_cache(
+const getWebposter = unstable_cache(
   async (url?: string) => {
     if (!process.env.DATABASE_URL) return null
 
@@ -79,11 +79,11 @@ const getMovieposter = unstable_cache(
     })
     return webposter
   },
-  ['getMovieposter'],
+  ['getWebposter'],
   {
     revalidate: 60,
-    tags: ['getMovieposter'],
-  },
+    tags: ['getWebposter'],
+  }
 )
 
 export default async function Home(props: Props) {
@@ -105,9 +105,10 @@ export default async function Home(props: Props) {
         <div className="flex min-h-[70svh] flex-1 items-center">
           <Generator
             cachedImageUrl={
-              getUrl(props) && (await getMovieposter(getUrl(props)))?.imageUrl
+              getUrlFromProps(props) &&
+              (await getWebposter(getUrlFromProps(props)))?.imageUrl
             }
-            paramUrl={getUrl(props)}
+            paramUrl={getUrlFromProps(props)}
           />
         </div>
 
