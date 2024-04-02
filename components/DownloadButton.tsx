@@ -1,5 +1,6 @@
 import { Download } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
+import { Spinner } from './ui/spinner'
 
 export const DownloadButton = ({
   imageUrl,
@@ -8,10 +9,13 @@ export const DownloadButton = ({
   imageUrl: string
   name: string
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleDownloadClick = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault()
+    setIsLoading(true)
 
     try {
       const response = await fetch(
@@ -33,6 +37,7 @@ export const DownloadButton = ({
     } catch (error) {
       console.error('Download failed', error)
     }
+    setIsLoading(false)
   }
 
   return (
@@ -40,7 +45,11 @@ export const DownloadButton = ({
       onClick={handleDownloadClick}
       className="rounded-lg bg-gray-100/10 hover:bg-gray-200/10 p-2 ring-1 ring-inset ring-gray-100/5 active:translate-y-1 duration-100"
     >
-      <Download className="h-4 w-4" />
+      {isLoading ? (
+        <Spinner className="h-4 w-4" />
+      ) : (
+        <Download className="h-4 w-4" />
+      )}
     </button>
   )
 }
