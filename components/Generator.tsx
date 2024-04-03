@@ -33,11 +33,12 @@ export const Generator = ({
 
   const router = useRouter()
 
-  const handleGenerate = async (url: string) => {
+  const handleGenerate = async (url: string, regenerationKey?: string) => {
+    setImageUrl(undefined)
     setStartedGenerationAt(new Date())
     const res = await fetch('/api/generatePoster', {
       method: 'POST',
-      body: JSON.stringify({ url }),
+      body: JSON.stringify({ url, regenerationKey }),
     })
 
     if (!res.ok) {
@@ -54,13 +55,35 @@ export const Generator = ({
     }
 
     setStartedGenerationAt(undefined)
-    router.push(`/${url}`)
 
     try {
       const resJson = await res.json()
       const imageUrl = resJson.url
 
       setImageUrl(imageUrl)
+
+      if (resJson.regenerationKey) {
+        toast.success(
+          "Successfully generated the poster. If you don't like it, feel free to regenerate it.",
+          {
+            duration: 6000000, // 100 minutes
+            action: {
+              label: 'Regenerate',
+              onClick: () => {
+                handleGenerate(url, resJson.regenerationKey)
+              },
+            },
+            onDismiss: () => {
+              router.push(`/${url}`)
+            },
+            onAutoClose: () => {
+              router.push(`/${url}`)
+            },
+          }
+        )
+      } else {
+        router.push(`/${url}`)
+      }
     } catch (error) {
       toast.error(
         "We couldn't generate a poster for this website. This is likely due to the website needing javascript to render. Please try another one."

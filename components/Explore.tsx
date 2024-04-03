@@ -13,6 +13,10 @@ const getLatestMovieposters = unstable_cache(
         createdAt: 'desc',
       },
       take: 16,
+      select: {
+        url: true,
+        imageUrl: true,
+      },
     })
     return webposters
   },
@@ -20,7 +24,7 @@ const getLatestMovieposters = unstable_cache(
   {
     revalidate: 60,
     tags: ['latestWebposters'],
-  },
+  }
 )
 
 export const Explore = async () => {
@@ -36,7 +40,7 @@ export const Explore = async () => {
       </div>
       <div className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 md:gap-y-10 lg:grid-cols-4">
         {webposters.map((webposter) => (
-          <Link href={`/${webposter.url}`} key={webposter.id}>
+          <Link href={`/${webposter.url}`} key={webposter.url}>
             <Webposter webposter={webposter} />
           </Link>
         ))}

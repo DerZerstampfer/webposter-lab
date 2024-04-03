@@ -11,11 +11,12 @@ export const maxDuration = 300
 
 const inputSchema = z.object({
   url: z.string(),
+  regenerationKey: z.string().optional(),
 })
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { url } = inputSchema.parse(body)
+  const { url, regenerationKey: inputRegenerationKey } = inputSchema.parse(body)
 
   const existingWebposter = await prisma.webposter.findUnique({
     where: {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
     },
   })
 
-  if (existingWebposter) {
+  if (existingWebposter && inputRegenerationKey !== existingWebposter.id) {
     return Response.json({
       url: existingWebposter.imageUrl,
     })
@@ -57,7 +58,7 @@ export async function POST(req: NextRequest) {
   const data = await fetchTeampilot({
     launchpadSlugId: process.env.LAUNCHPAD_ID,
     message: url,
-    cacheTtlSeconds: 'forever',
+    cacheTtlSeconds: existingWebposter ? 0 : 'forever',
   })
 
   if (data.mediaAttachments?.length === 0) {
@@ -71,19 +72,38 @@ export async function POST(req: NextRequest) {
   }
 
   const imageUrl = data.mediaAttachments?.[0]?.url
+  let regenerationKey: string | undefined
 
   if (imageUrl) {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.TURSO_DATABASE_URL && !process.env.TURSO_AUTH_TOKEN) {
       console.log('No database connection - skipping saving to database')
     } else {
       // It isn't too important that it lands in the db, so if it fails to create don't return an error
       try {
-        await prisma.webposter.create({
-          data: {
-            url: url,
-            imageUrl: imageUrl,
-          },
-        })
+        if (existingWebposter) {
+          await prisma.webposter.update({
+            where: {
+              url,
+            },
+            data: {
+              imageUrl: imageUrl,
+            },
+          })
+
+          regenerationKey = existingWebposter.id
+        } else {
+          const webposter = await prisma.webposter.create({
+            data: {
+              url: url,
+              imageUrl: imageUrl,
+            },
+            select: {
+              id: true,
+            },
+          })
+
+          regenerationKey = webposter.id
+        }
       } catch (error) {
         console.error(error)
       }
@@ -92,5 +112,6 @@ export async function POST(req: NextRequest) {
 
   return Response.json({
     url: imageUrl,
+    regenerationKey,
   })
 }

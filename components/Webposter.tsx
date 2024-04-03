@@ -5,7 +5,7 @@ export const Webposter = ({
   webposter,
   unoptimized = false,
 }: {
-  webposter: WebposterType
+  webposter: Pick<WebposterType, 'imageUrl' | 'url'>
   unoptimized?: boolean
 }) => {
   return (
