@@ -73,14 +73,10 @@ export const Generator = ({
                 handleGenerate(url, resJson.regenerationKey)
               },
             },
-            onDismiss: () => {
-              router.push(`/${url}`)
-            },
-            onAutoClose: () => {
-              router.push(`/${url}`)
-            },
           }
         )
+
+        window.history.pushState({}, '', `/${url}`)
       } else {
         router.push(`/${url}`)
       }
