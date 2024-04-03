@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 
 import '@/app/globals.css'
 import { Providers } from '@/app/providers'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,12 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <script
-          async
+        <Script
           defer
           data-website-id={process.env.UMAMI_WEBSITE_ID}
           src={process.env.UMAMI_URL}
-        ></script>
+        />
       </head>
       <body className={inter.className}>
         <Providers>{children}</Providers>
