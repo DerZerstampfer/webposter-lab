@@ -39,6 +39,20 @@ export const Generator = ({
       method: 'POST',
       body: JSON.stringify({ url }),
     })
+
+    if (!res.ok) {
+      const resJson = await res.json()
+
+      if (resJson.error) {
+        toast.error(resJson.error)
+      } else {
+        toast.error('An error occurred while generating the poster.')
+      }
+
+      setStartedGenerationAt(undefined)
+      return
+    }
+
     setStartedGenerationAt(undefined)
     router.push(`/${url}`)
 

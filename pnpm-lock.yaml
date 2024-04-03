@@ -23,6 +23,9 @@ dependencies:
   '@teampilot/sdk':
     specifier: ^0.0.26
     version: 0.0.26(zod@3.22.4)
+  '@unkey/ratelimit':
+    specifier: ^0.1.3
+    version: 0.1.3
   '@vercel/analytics':
     specifier: ^1.1.1
     version: 1.1.1
@@ -935,6 +938,25 @@ packages:
   /@ungap/structured-clone@1.2.0:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
+
+  /@unkey/api@0.19.4:
+    resolution: {integrity: sha512-edACid6dwZYGlmoOIP4F6mmS1qDdn1CUfs9EnHu3kChrIoc4RXDrtJCDNPqOn2OrBZbqiFMa1ieOibKr2JMCYw==}
+    dependencies:
+      '@unkey/rbac': 0.1.11
+    dev: false
+
+  /@unkey/ratelimit@0.1.3:
+    resolution: {integrity: sha512-7iKda/OYq4novyMiQyruHVszCN6xG4jlE0tP7PqmDWpOnIKFVpb21NeyMBhXpXwZdveGrhUhFh+6wT7kiNs9Mg==}
+    dependencies:
+      '@unkey/api': 0.19.4
+    dev: false
+
+  /@unkey/rbac@0.1.11:
+    resolution: {integrity: sha512-S1XkX6rrynW6t6qTZpJd5yxpj9FxsSuZzqKDJBMYsJD1AJXOKBEE0dPqlq/g5nmz/fd2q5hjDEBp7m1s3wPFtQ==}
+    dependencies:
+      zod: 3.22.4
+      zod-error: 1.5.0
+    dev: false
 
   /@vercel/analytics@1.1.1:
     resolution: {integrity: sha512-+NqgNmSabg3IFfxYhrWCfB/H+RCUOCR5ExRudNG2+pcRehq628DJB5e1u1xqwpLtn4pAYii4D98w7kofORAGQA==}
@@ -3349,6 +3371,12 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod-error@1.5.0:
+    resolution: {integrity: sha512-zzopKZ/skI9iXpqCEPj+iLCKl9b88E43ehcU+sbRoHuwGd9F1IDVGQ70TyO6kmfiRL1g4IXkjsXK+g1gLYl4WQ==}
+    dependencies:
+      zod: 3.22.4
+    dev: false
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
