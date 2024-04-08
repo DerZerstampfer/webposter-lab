@@ -26,10 +26,7 @@ export const Webposter = ({
         unoptimized={unoptimized}
         className="relative"
       />
-      <div
-        className="truncate font-mono text-2xl sm:text-lg"
-        title={webposter.url}
-      >
+      <div className="truncate text-2xl sm:text-lg" title={webposter.url}>
         {webposter.url}
       </div>
     </div>

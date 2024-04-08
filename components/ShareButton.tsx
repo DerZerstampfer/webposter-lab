@@ -11,7 +11,7 @@ export const ShareButton = ({ url }: { url: string }) => {
           title: `Webposter for ${url} - By Webposter Lab`,
         })
       }
-      className="rounded-lg bg-gray-100/10 p-2 ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
+      className="rounded-lg bg-gray-100/30 p-2 ring-1 ring-inset ring-gray-100/20 duration-100 hover:bg-gray-200/30 active:translate-y-1"
     >
       <Share2 className="h-4 w-4" />
     </button>

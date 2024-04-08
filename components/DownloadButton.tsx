@@ -43,7 +43,7 @@ export const DownloadButton = ({
   return (
     <button
       onClick={handleDownloadClick}
-      className="rounded-lg bg-gray-100/10 hover:bg-gray-200/10 p-2 ring-1 ring-inset ring-gray-100/5 active:translate-y-1 duration-100"
+      className="rounded-lg bg-gray-100/30 hover:bg-gray-200/30 p-2 ring-1 ring-inset ring-gray-100/20 active:translate-y-1 duration-100"
     >
       {isLoading ? (
         <Spinner className="h-4 w-4" />

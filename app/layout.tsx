@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Sora } from 'next/font/google'
 
 import '@/app/globals.css'
 import { Providers } from '@/app/providers'
 import Script from 'next/script'
 
-const inter = Inter({ subsets: ['latin'] })
+const outfit = Sora({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://webposterlab.com'),
@@ -46,7 +46,7 @@ export default function RootLayout({
           src={process.env.UMAMI_URL}
         />
       </head>
-      <body className={inter.className}>
+      <body className={outfit.className}>
         <Providers>{children}</Providers>
       </body>
     </html>
