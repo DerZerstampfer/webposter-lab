@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import { Explore } from '@/components/Explore'
 import { Generator } from '@/components/Generator'
-import { AuroraBackground } from '@/components/ui/aurora-background'
 import { prisma } from '@/lib/db'
 import { Metadata, ResolvingMetadata } from 'next'
 import { unstable_cache } from 'next/cache'
@@ -88,10 +87,8 @@ const getWebposter = unstable_cache(
 
 export default async function Home(props: Props) {
   return (
-    <AuroraBackground>
-      {/* <div className="fixed -z-10 h-screen w-screen opacity-10">
-        <Image src={BGImage} alt="bg image" fill className="object-cover" />
-      </div> */}
+    <>
+      <div className="absolute top-0 z-[-2] size-full bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.2),rgba(255,255,255,0))]"></div>
       <main className="flex min-h-[100svh] flex-col items-center justify-around gap-4 px-4">
         <div className="flex flex-col items-center pt-6 md:gap-1">
           <Link href="/">
@@ -104,9 +101,6 @@ export default async function Home(props: Props) {
               </div>
             </div>
           </Link>
-          {/* <span className="text-center text-sm text-muted-foreground md:text-lg">
-            Unique AI generated posters for any website
-          </span> */}
         </div>
 
         <div className="flex min-h-[70svh] flex-1 items-center">
@@ -158,6 +152,6 @@ export default async function Home(props: Props) {
           </div>
         </footer>
       </main>
-    </AuroraBackground>
+    </>
   )
 }

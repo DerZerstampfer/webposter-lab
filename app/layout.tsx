@@ -3,6 +3,7 @@ import { Sora } from 'next/font/google'
 
 import '@/app/globals.css'
 import { Providers } from '@/app/providers'
+import { TailwindBreakpointIndicator } from '@/components/tailwind-breakpoint-indicator'
 import Script from 'next/script'
 
 const outfit = Sora({ subsets: ['latin'] })
@@ -48,6 +49,7 @@ export default function RootLayout({
       </head>
       <body className={outfit.className}>
         <Providers>{children}</Providers>
+        <TailwindBreakpointIndicator />
       </body>
     </html>
   )
