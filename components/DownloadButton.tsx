@@ -1,6 +1,7 @@
+import { Spinner } from '@/components/ui/spinner'
+import { motion } from 'framer-motion'
 import { Download } from 'lucide-react'
 import React, { useState } from 'react'
-import { Spinner } from './ui/spinner'
 
 export const DownloadButton = ({
   imageUrl,
@@ -41,16 +42,28 @@ export const DownloadButton = ({
   }
 
   return (
-    <button
-      onClick={handleDownloadClick}
-      className="rounded-lg bg-gray-100/30 hover:bg-gray-200/30 p-2 ring-1 ring-inset ring-gray-100/20 active:translate-y-1 duration-100"
+    <motion.div
+      initial={{ translateY: '200%' }}
+      animate={{ translateY: '0%' }}
+      exit={{ translateY: '200%' }}
+      transition={{
+        type: 'spring',
+        stiffness: 190,
+        damping: 15,
+      }}
+      className="relative"
     >
-      {isLoading ? (
-        <Spinner className="h-4 w-4" />
-      ) : (
-        <Download className="h-4 w-4" />
-      )}
-    </button>
+      <button
+        onClick={handleDownloadClick}
+        className="relative rounded-lg bg-gray-100/50 hover:bg-gray-200/50 p-2 ring-1 ring-inset ring-gray-100/30 active:translate-y-1 duration-100"
+      >
+        {isLoading ? (
+          <Spinner className="h-4 w-4" />
+        ) : (
+          <Download className="h-4 w-4" />
+        )}
+      </button>
+    </motion.div>
   )
 }
 

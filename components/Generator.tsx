@@ -1,7 +1,8 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { DomainInput } from '@/components/DomainInput'
@@ -13,7 +14,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { RotateCcw } from 'lucide-react'
+import { AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 
 export const Generator = ({
@@ -23,13 +24,14 @@ export const Generator = ({
   cachedImageUrl?: string
   paramUrl?: string
 }) => {
-  const imageRef = useRef(null)
   const [imageUrl, setImageUrl] = useState(cachedImageUrl)
   const [startedGenerationAt, setStartedGenerationAt] = useState<
     Date | undefined
   >()
 
   const [url, setUrl] = useState(paramUrl ?? '')
+
+  const [posterIsHovered, setPosterIsHovered] = useState(false)
 
   const router = useRouter()
 
@@ -126,53 +128,81 @@ export const Generator = ({
     )
   } else if (imageUrl) {
     return (
-      <div
-        className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10"
-        ref={imageRef}
-      >
-        <div className="flex w-full items-end justify-between gap-2">
-          <div className="truncate text-2xl tracking-tight" title={url}>
-            {url}
-          </div>
-
-          <a
-            href="https://teampilot.ai/"
-            target="_blank"
-            className="whitespace-nowrap text-sm text-muted-foreground"
-          >
-            Powered by teampilot.ai
-          </a>
-        </div>
-        <div className="mb-3 w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
-          <div className="relative aspect-[1024/1792] w-full">
-            <div className="absolute bottom-2 right-2 z-10 space-x-2">
-              <ShareButton url={url} />
-              <DownloadButton imageUrl={imageUrl} name={url} />
-            </div>
-            <Image
-              fill
-              className="rounded-md shadow-2xl ring-1 ring-gray-100/10"
-              src={imageUrl}
-              alt="Generated Web Poster"
-              unoptimized
-            />
-          </div>
-        </div>
-        <div className="flex w-full justify-center">
-          <button
-            onClick={() => {
-              setImageUrl(undefined)
-              setStartedGenerationAt(undefined)
-              setUrl('')
-              router.push('/')
-            }}
-            className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-1 px-2 text-sm ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
-          >
-            <RotateCcw className="h-3 w-3" />
-            Generate more
-          </button>
+      <div className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10">
+        <div
+          className="relative aspect-[1024/1792] w-full overflow-hidden"
+          onMouseEnter={() => setPosterIsHovered(true)}
+          onMouseLeave={() => setPosterIsHovered(false)}
+        >
+          <AnimatePresence>
+            {posterIsHovered && (
+              <div className="absolute bottom-2 right-2 z-10">
+                <div className="relative flex gap-2">
+                  <motion.div
+                    className="absolute w-full h-full bg-black blur-xl scale-150"
+                    initial={{ opacity: '0%' }}
+                    animate={{ opacity: '100%' }}
+                    exit={{ opacity: '0%' }}
+                  />
+                  <ShareButton url={url} />
+                  <DownloadButton imageUrl={imageUrl} name={url} />
+                </div>
+              </div>
+            )}
+          </AnimatePresence>
+          <Image
+            className="rounded-md shadow-2xl"
+            fill
+            src={imageUrl}
+            alt="Generated Web Poster"
+            unoptimized
+          />
         </div>
       </div>
+      // <div className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10">
+      //   <div className="flex w-full items-end justify-between gap-2">
+      //     <div className="truncate text-2xl tracking-tight" title={url}>
+      //       {url}
+      //     </div>
+
+      //     <a
+      //       href="https://teampilot.ai/"
+      //       target="_blank"
+      //       className="whitespace-nowrap text-sm text-muted-foreground"
+      //     >
+      //       Powered by teampilot.ai
+      //     </a>
+      //   </div>
+      //   <div className="mb-3 w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
+      //     <div className="relative aspect-[1024/1792] w-full">
+      //       <div className="absolute bottom-2 right-2 z-10 space-x-2">
+      //         <ShareButton url={url} />
+      //         <DownloadButton imageUrl={imageUrl} name={url} />
+      //       </div>
+      //       <Image
+      //         fill
+      //         className="rounded-md shadow-2xl ring-1 ring-gray-100/10"
+      //         src={imageUrl}
+      //         alt="Generated Web Poster"
+      //         unoptimized
+      //       />
+      //     </div>
+      //   </div>
+      //   <div className="flex w-full justify-center">
+      //     <button
+      //       onClick={() => {
+      //         setImageUrl(undefined)
+      //         setStartedGenerationAt(undefined)
+      //         setUrl('')
+      //         router.push('/')
+      //       }}
+      //       className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-1 px-2 text-sm ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
+      //     >
+      //       <RotateCcw className="h-3 w-3" />
+      //       Generate more
+      //     </button>
+      //   </div>
+      // </div>
     )
   } else {
     return (
