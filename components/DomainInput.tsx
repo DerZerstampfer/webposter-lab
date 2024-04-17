@@ -87,9 +87,9 @@ export const DomainInput = ({
         >
           <input
             className={cn(
-              'focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a flex h-9 w-full md:w-96 flex-1 ml-2 bg-background text-2xl placeholder:text-muted-foreground/60 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50'
+              'focus-visible:drop-shadow-[0_0_0.3rem_#ffffff70]a flex h-9 w-full md:w-96 flex-1 ml-2 bg-background text-2xl placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50'
             )}
-            placeholder="e.g. example.com"
+            placeholder="Enter domain"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
