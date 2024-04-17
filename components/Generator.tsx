@@ -128,7 +128,7 @@ export const Generator = ({
     )
   } else if (imageUrl) {
     return (
-      <div className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10">
+      <div className="flex w-[85svw] max-w-[424px] flex-col items-center justify-center gap-1 pb-10 pt-14">
         <div
           className="relative aspect-[1024/1792] w-full overflow-hidden"
           onMouseEnter={() => setPosterIsHovered(true)}
@@ -158,6 +158,7 @@ export const Generator = ({
             unoptimized
           />
         </div>
+        <div className="text-3xl">{url}</div>
       </div>
       // <div className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10">
       //   <div className="flex w-full items-end justify-between gap-2">

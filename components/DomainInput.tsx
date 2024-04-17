@@ -4,10 +4,10 @@ import { Sparkles } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { MovingBorder } from '@/components/ui/moving-border'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MovingBorder } from './ui/moving-border'
 
 const getHostname = async (url: string, signal?: AbortSignal) => {
   if (!url) return undefined
