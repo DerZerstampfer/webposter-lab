@@ -15,6 +15,7 @@ import {
   HoverCardTrigger,
 } from '@/components/ui/hover-card'
 import { AnimatePresence } from 'framer-motion'
+import { RotateCcw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export const Generator = ({
@@ -128,7 +129,7 @@ export const Generator = ({
     )
   } else if (imageUrl) {
     return (
-      <div className="flex w-[85svw] max-w-[424px] flex-col items-center justify-center gap-1 pb-10 pt-14">
+      <div className="flex w-[85svw] max-w-[424px] flex-col items-center justify-center gap-1 pb-6 pt-14">
         <div
           className="relative aspect-[1024/1792] w-full overflow-hidden"
           onMouseEnter={() => setPosterIsHovered(true)}
@@ -159,6 +160,18 @@ export const Generator = ({
           />
         </div>
         <div className="text-3xl">{url}</div>
+        <button
+          onClick={() => {
+            setImageUrl(undefined)
+            setStartedGenerationAt(undefined)
+            setUrl('')
+            router.push('/')
+          }}
+          className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-1 px-2 text-sm ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1 mt-6"
+        >
+          <RotateCcw className="h-3 w-3" />
+          Generate more
+        </button>
       </div>
       // <div className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10">
       //   <div className="flex w-full items-end justify-between gap-2">
