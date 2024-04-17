@@ -173,50 +173,6 @@ export const Generator = ({
           Generate more
         </button>
       </div>
-      // <div className="flex w-[85svw] max-w-[424px] flex-col items-start justify-center gap-1 py-10">
-      //   <div className="flex w-full items-end justify-between gap-2">
-      //     <div className="truncate text-2xl tracking-tight" title={url}>
-      //       {url}
-      //     </div>
-
-      //     <a
-      //       href="https://teampilot.ai/"
-      //       target="_blank"
-      //       className="whitespace-nowrap text-sm text-muted-foreground"
-      //     >
-      //       Powered by teampilot.ai
-      //     </a>
-      //   </div>
-      //   <div className="mb-3 w-full rounded-xl bg-gray-100/5 p-2 ring-1 ring-inset ring-gray-100/5 lg:rounded-2xl lg:p-3">
-      //     <div className="relative aspect-[1024/1792] w-full">
-      //       <div className="absolute bottom-2 right-2 z-10 space-x-2">
-      //         <ShareButton url={url} />
-      //         <DownloadButton imageUrl={imageUrl} name={url} />
-      //       </div>
-      //       <Image
-      //         fill
-      //         className="rounded-md shadow-2xl ring-1 ring-gray-100/10"
-      //         src={imageUrl}
-      //         alt="Generated Web Poster"
-      //         unoptimized
-      //       />
-      //     </div>
-      //   </div>
-      //   <div className="flex w-full justify-center">
-      //     <button
-      //       onClick={() => {
-      //         setImageUrl(undefined)
-      //         setStartedGenerationAt(undefined)
-      //         setUrl('')
-      //         router.push('/')
-      //       }}
-      //       className="flex flex-row items-center justify-center gap-1 rounded-lg bg-gray-100/10 p-1 px-2 text-sm ring-1 ring-inset ring-gray-100/5 duration-100 hover:bg-gray-200/10 active:translate-y-1"
-      //     >
-      //       <RotateCcw className="h-3 w-3" />
-      //       Generate more
-      //     </button>
-      //   </div>
-      // </div>
     )
   } else {
     return (
