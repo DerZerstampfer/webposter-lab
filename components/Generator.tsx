@@ -159,7 +159,7 @@ export const Generator = ({
             unoptimized
           />
         </div>
-        <div className="text-3xl">{new URL(url).hostname}</div>
+        <div className="text-3xl">{url}</div>
         <button
           onClick={() => {
             setImageUrl(undefined)
