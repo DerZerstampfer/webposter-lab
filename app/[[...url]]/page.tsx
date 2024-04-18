@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Explore } from '@/components/Explore'
 import { Generator } from '@/components/Generator'
 import { prisma } from '@/lib/db'
-import BGImage from '@/public/bg.webp'
 import { Metadata, ResolvingMetadata } from 'next'
 import { unstable_cache } from 'next/cache'
 
@@ -89,17 +88,19 @@ const getWebposter = unstable_cache(
 export default async function Home(props: Props) {
   return (
     <>
-      <div className="fixed -z-10 h-screen w-screen opacity-10">
-        <Image src={BGImage} alt="bg image" fill className="object-cover" />
-      </div>
+      <div className="absolute top-0 z-[-2] size-full bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.2),rgba(255,255,255,0))]"></div>
       <main className="flex min-h-[100svh] flex-col items-center justify-around gap-4 px-4">
         <div className="flex flex-col items-center pt-6 md:gap-1">
           <Link href="/">
-            <div className="font-mono text-4xl md:text-5xl">Webposter Lab</div>
+            <div className="text-4xl md:text-7xl relative">
+              <span className="italic absolute right-0 top-4 md:top-8 bg-clip-text text-transparent bg-gradient-to-b from-orange-700 to-red-700 pr-1">
+                Lab
+              </span>
+              <div className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300 relative pr-9 md:pr-16">
+                Webposter
+              </div>
+            </div>
           </Link>
-          <span className="text-center font-mono text-sm text-muted-foreground md:text-lg">
-            Unique AI generated posters for any website
-          </span>
         </div>
 
         <div className="flex min-h-[70svh] flex-1 items-center">

@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const imageUrl = data.mediaAttachments?.[0]?.url
+  const imageUrl = data.mediaAttachments?.[data.mediaAttachments.length - 1]?.url
   let regenerationKey: string | undefined
 
   if (imageUrl) {
