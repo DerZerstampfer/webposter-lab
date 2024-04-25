@@ -81,7 +81,7 @@ export const Generator = ({
 
         window.history.pushState({}, '', `/${url}`)
       } else {
-        router.push(`/${url}`)
+        window.history.pushState({}, '', `/${url}`)
       }
     } catch (error) {
       toast.error(

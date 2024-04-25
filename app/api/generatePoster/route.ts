@@ -1,7 +1,8 @@
-import { prisma } from '@/lib/db'
+import { dbEnvVarsAreDefined, prisma } from '@/lib/db'
 import { getClientIp } from '@/lib/getClientIp'
 import { fetchTeampilot } from '@teampilot/sdk'
 import { Ratelimit } from '@unkey/ratelimit'
+import jwt from 'jsonwebtoken'
 import { NextRequest } from 'next/server'
 import { z } from 'zod'
 
@@ -14,20 +15,39 @@ const inputSchema = z.object({
   regenerationKey: z.string().optional(),
 })
 
+const regenerationJWT = z.object({
+  id: z.string(),
+})
+
 export async function POST(req: NextRequest) {
   const body = await req.json()
   const { url, regenerationKey: inputRegenerationKey } = inputSchema.parse(body)
 
-  const existingWebposter = await prisma.webposter.findUnique({
-    where: {
-      url,
-    },
-  })
+  const existingWebposter = prisma
+    ? await prisma.webposter.findUnique({
+        where: {
+          url,
+        },
+      })
+    : undefined
 
-  if (existingWebposter && inputRegenerationKey !== existingWebposter.id) {
-    return Response.json({
-      url: existingWebposter.imageUrl,
-    })
+  if (existingWebposter && inputRegenerationKey) {
+    try {
+      if (!process.env.JWT_SECRET) throw new Error('No JWT secret set')
+      const decoded = jwt.verify(inputRegenerationKey, process.env.JWT_SECRET)
+      const { id } = regenerationJWT.parse(decoded)
+
+      if (id !== existingWebposter.id) {
+        throw new Error('Invalid regeneration key')
+      }
+    } catch (error) {
+      return Response.json(
+        {
+          error: 'Invalid regeneration key',
+        },
+        { status: 400 }
+      )
+    }
   }
 
   // If the unkey root key is set, we'll use it to rate limit the requests
@@ -71,17 +91,18 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  const imageUrl = data.mediaAttachments?.[data.mediaAttachments.length - 1]?.url
+  const imageUrl =
+    data.mediaAttachments?.[data.mediaAttachments.length - 1]?.url
   let regenerationKey: string | undefined
 
   if (imageUrl) {
-    if (!process.env.TURSO_DATABASE_URL && !process.env.TURSO_AUTH_TOKEN) {
+    if (!dbEnvVarsAreDefined) {
       console.log('No database connection - skipping saving to database')
     } else {
       // It isn't too important that it lands in the db, so if it fails to create don't return an error
       try {
         if (existingWebposter) {
-          await prisma.webposter.update({
+          await prisma?.webposter.update({
             where: {
               url,
             },
@@ -90,9 +111,14 @@ export async function POST(req: NextRequest) {
             },
           })
 
-          regenerationKey = existingWebposter.id
+          if (process.env.JWT_SECRET) {
+            regenerationKey = jwt.sign(
+              regenerationJWT.parse({ id: existingWebposter.id }),
+              process.env.JWT_SECRET
+            )
+          }
         } else {
-          const webposter = await prisma.webposter.create({
+          const webposter = await prisma?.webposter.create({
             data: {
               url: url,
               imageUrl: imageUrl,
@@ -102,7 +128,12 @@ export async function POST(req: NextRequest) {
             },
           })
 
-          regenerationKey = webposter.id
+          if (process.env.JWT_SECRET && webposter) {
+            regenerationKey = jwt.sign(
+              regenerationJWT.parse({ id: webposter.id }),
+              process.env.JWT_SECRET
+            )
+          }
         }
       } catch (error) {
         console.error(error)

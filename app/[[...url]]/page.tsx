@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { Explore } from '@/components/Explore'
 import { Generator } from '@/components/Generator'
-import { prisma } from '@/lib/db'
+import { dbEnvVarsAreDefined, prisma } from '@/lib/db'
 import { Metadata, ResolvingMetadata } from 'next'
 import { unstable_cache } from 'next/cache'
 
@@ -25,7 +25,7 @@ export async function generateMetadata(
   props: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  if (!process.env.DATABASE_URL) return {}
+  if (!dbEnvVarsAreDefined) return {}
 
   const url = getUrlFromProps(props)
 
@@ -33,7 +33,7 @@ export async function generateMetadata(
     return {}
   }
 
-  const webposter = await prisma.webposter.findUnique({
+  const webposter = await prisma?.webposter.findUnique({
     where: { url },
     select: {
       imageUrl: true,
@@ -65,13 +65,13 @@ export async function generateMetadata(
 
 const getWebposter = unstable_cache(
   async (url?: string) => {
-    if (!process.env.DATABASE_URL) return null
+    if (!dbEnvVarsAreDefined) return null
 
     if (!url) {
       return null
     }
 
-    const webposter = await prisma.webposter.findUnique({
+    const webposter = await prisma?.webposter.findUnique({
       where: {
         url,
       },
@@ -113,7 +113,7 @@ export default async function Home(props: Props) {
           />
         </div>
 
-        {!!process.env.DATABASE_URL && <Explore />}
+        {!!dbEnvVarsAreDefined && <Explore />}
 
         <footer className="flex w-full flex-col justify-end py-6">
           <div className="container mx-auto flex items-center justify-between p-0">
