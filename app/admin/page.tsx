@@ -12,6 +12,10 @@ export default async function Page({
     notFound()
   }
 
+  if (!prisma) {
+    return <div>Database is not connected</div>
+  }
+
   const unpublishedWebposters = await prisma.webposter.findMany({
     where: {
       published: false,
@@ -35,7 +39,7 @@ export default async function Page({
   const publishWebposter = async (formData: FormData) => {
     'use server'
 
-    await prisma.webposter.update({
+    await prisma?.webposter.update({
       where: { id: formData.get('id') as string },
       data: { published: true },
     })
@@ -47,7 +51,7 @@ export default async function Page({
   const unpublishWebposter = async (formData: FormData) => {
     'use server'
 
-    await prisma.webposter.update({
+    await prisma?.webposter.update({
       where: { id: formData.get('id') as string },
       data: { published: false },
     })
