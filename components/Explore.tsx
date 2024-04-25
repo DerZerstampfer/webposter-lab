@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const getLatestMovieposters = unstable_cache(
   async () => {
-    const webposters = await prisma.webposter.findMany({
+    const webposters = await prisma?.webposter.findMany({
       where: {
         published: true,
       },
@@ -28,6 +28,14 @@ const getLatestMovieposters = unstable_cache(
 )
 
 export const Explore = async () => {
+  if (!prisma) {
+    return (
+      <div>
+        The Explore Component can only be used when a Database is connected
+      </div>
+    )
+  }
+
   const webposters = await getLatestMovieposters()
 
   return (
@@ -41,7 +49,7 @@ export const Explore = async () => {
         </p>
       </div>
       <div className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 md:grid-cols-3 md:gap-y-10 lg:grid-cols-4">
-        {webposters.map((webposter) => (
+        {webposters?.map((webposter) => (
           <Link href={`/${webposter.url}`} key={webposter.url}>
             <Webposter webposter={webposter} />
           </Link>
