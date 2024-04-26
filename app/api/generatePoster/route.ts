@@ -31,6 +31,12 @@ export async function POST(req: NextRequest) {
       })
     : undefined
 
+  if (existingWebposter && inputRegenerationKey === undefined) {
+    return Response.json({
+      url: existingWebposter.imageUrl,
+    })
+  }
+
   if (existingWebposter && inputRegenerationKey) {
     try {
       if (!process.env.JWT_SECRET) throw new Error('No JWT secret set')
