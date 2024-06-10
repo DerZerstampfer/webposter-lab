@@ -103,7 +103,7 @@ export const Generator = ({
           This may take a while (
           <HoverCard>
             <HoverCardTrigger>
-              <strong className="underline">about 2 minutes</strong>
+              <strong className="underline">up to 1 minute</strong>
             </HoverCardTrigger>
             <HoverCardContent className="w-96">
               <div className="flex flex-col gap-1 text-left">
