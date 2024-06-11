@@ -135,7 +135,7 @@ export default async function Home(props: Props) {
             </Link>
 
             <Link
-              href="https://teampilot.ai/"
+              href="https://teampilot.ai/dev"
               className="flex items-end gap-1 text-xs text-gray-500 hover:underline"
               target={'_blank'}
             >

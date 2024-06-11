@@ -8,7 +8,7 @@
 
 # Introduction
 
-Webposter Lab is an free to use open-source Webposter generator powered by [Teampilot AI](https://teampilot.ai).
+Webposter Lab is an free to use open-source Webposter generator powered by [Teampilot AI](https://teampilot.ai/dev).
 Webposters are unique movie poster like posters themed to your website.
 
 # Examples
@@ -19,7 +19,7 @@ Webposters are unique movie poster like posters themed to your website.
 
 # Motivation
 
-Webposter Lab was created as a fun project to explore the possibilities of [Teampilot AI](https://teampilot.ai) as a Development Platform and to create something that is useful for the community.
+Webposter Lab was created as a fun project to explore the possibilities of [Teampilot AI](https://teampilot.ai/dev) as a Development Platform and to create something that is useful for the community.
 
 # Get it running locally
 
@@ -35,7 +35,7 @@ or
 pnpm install
 ```
 
-The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai) (you get one free team which is has everything included that you need to power this app, no credit card needed) and copy the launchpad [here](https://teampilot.ai/copy/webposter-generator-447ed332ce54fc588f4a558eaac4e469).
+The poster generator in itself is powered by [Teampilot AI](https://teampilot.ai/dev). To get it running locally, you need to create an account at [Teampilot AI](https://teampilot.ai/start) (you get one free team which is has everything included that you need to power this app, no credit card needed) and copy the launchpad [here](https://teampilot.ai/copy/webposter-generator-447ed332ce54fc588f4a558eaac4e469).
 
 **Note**: At the time of writing, the launchpad needs the DALL E 3 function which currently is in Beta, so you need to signup for the Beta at [Beta Signup](https://teampilot.ai/start/beta) to use this launchpad.
 

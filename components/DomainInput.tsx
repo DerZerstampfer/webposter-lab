@@ -97,7 +97,7 @@ export const DomainInput = ({
         </form>
       </div>
       <Link
-        href="https://teampilot.ai/"
+        href="https://teampilot.ai/dev"
         className="flex items-end gap-1 text-sm text-gray-500 hover:underline"
         target={'_blank'}
       >
