@@ -8,27 +8,7 @@ import { MovingBorder } from '@/components/ui/moving-border'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
-
-const getHostname = async (url: string, signal?: AbortSignal) => {
-  if (!url) return undefined
-
-  const urlWithProtocol =
-    url.startsWith('http://') || url.startsWith('https://')
-      ? url
-      : 'https://' + url
-
-  try {
-    await fetch(urlWithProtocol, {
-      mode: 'no-cors',
-      signal,
-      redirect: 'follow',
-    })
-    const hostname = new URL(urlWithProtocol).hostname
-    return hostname
-  } catch (e) {
-    return undefined
-  }
-}
+import { extractHostname, validateUrl } from '@/lib/urlHelper'
 
 export const DomainInput = ({
   handleGenerate,
@@ -44,9 +24,9 @@ export const DomainInput = ({
 
   useEffect(() => {
     const checkUrl = async () => {
-      const hostname = await getHostname(url, abortController.current.signal)
+      const isValid = await validateUrl(url, abortController.current.signal)
       if (!abortController.current.signal.aborted) {
-        setIsValidUrl(hostname !== undefined)
+        setIsValidUrl(isValid)
       }
     }
 
@@ -78,11 +58,14 @@ export const DomainInput = ({
           className="flex gap-2 rounded-full border-2 border-slate-700 bg-background px-2 py-2 items-center relative max-w-fit"
           onSubmit={async (e) => {
             e.preventDefault()
-            const hostname = await getHostname(url)
-
-            if (hostname) {
-              handleGenerate(hostname)
+            const isValide = await validateUrl(url)
+            if (!isValide) {
+              return
             }
+
+            const hostname = await extractHostname(url)
+
+            handleGenerate(hostname)
           }}
         >
           <input

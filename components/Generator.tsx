@@ -17,6 +17,7 @@ import {
 import { AnimatePresence } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { extractHostname } from '@/lib/urlHelper'
 
 export const Generator = ({
   cachedImageUrl,
@@ -159,7 +160,7 @@ export const Generator = ({
             unoptimized
           />
         </div>
-        <div className="text-3xl">{url}</div>
+        <div className="text-3xl text-center">{extractHostname(url)}</div>
         <button
           onClick={() => {
             setImageUrl(undefined)
