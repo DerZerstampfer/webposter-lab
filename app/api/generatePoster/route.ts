@@ -83,7 +83,9 @@ export async function POST(req: NextRequest) {
 
   const data = await fetchTeampilot({
     launchpadSlugId: process.env.LAUNCHPAD_ID,
-    message: `${url} - research, lookup dominant color, generate poster, add watermark`,
+    message: `${url} - research, lookup dominant color, generate poster, add watermark
+
+please always go for a 3d disney like style`,
     cacheTtlSeconds: existingWebposter ? 0 : 'forever',
   })
 
