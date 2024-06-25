@@ -24,6 +24,7 @@ export const Providers = ({ children }: Props) => {
           duration: 10_000,
         }}
       />
+      <Analytics />
       {process.env.OPENPANEL_CLIENT_ID && (
         <OpenpanelProvider
           url="/api/op"
@@ -33,7 +34,6 @@ export const Providers = ({ children }: Props) => {
           trackOutgoingLinks={true}
         />
       )}
-      <Analytics />
     </>
   )
 }
