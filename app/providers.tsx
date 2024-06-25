@@ -26,6 +26,7 @@ export const Providers = ({ children }: Props) => {
       />
       {process.env.OPENPANEL_CLIENT_ID && (
         <OpenpanelProvider
+          url="/api/op"
           clientId={process.env.OPENPANEL_CLIENT_ID}
           trackScreenViews={true}
           trackAttributes={true}
