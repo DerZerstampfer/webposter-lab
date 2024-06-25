@@ -18,6 +18,7 @@ import { AnimatePresence } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { extractHostname } from '@/lib/urlHelper'
+import { trackEvent } from '@openpanel/nextjs'
 
 export const Generator = ({
   cachedImageUrl,
@@ -67,6 +68,17 @@ export const Generator = ({
       setImageUrl(imageUrl)
 
       if (resJson.regenerationKey) {
+        // If Openpanel is enabled, track the event
+        if (process.env.OPENPANEL_CLIENT_ID) {
+          trackEvent('generated_poster', {
+            url: url,
+          })
+          regenerationKey &&
+            trackEvent('regenerated_poster', {
+              url: url,
+            })
+        }
+
         toast.success(
           "Successfully generated the poster. If you don't like it, feel free to regenerate it.",
           {

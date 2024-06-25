@@ -8,6 +8,9 @@ dependencies:
   '@libsql/client':
     specifier: ^0.5.3
     version: 0.5.3
+  '@openpanel/nextjs':
+    specifier: 0.0.10-beta
+    version: 0.0.10-beta(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
   '@prisma/adapter-libsql':
     specifier: ^5.10.2
     version: 5.10.2(@libsql/client@0.5.3)
@@ -450,6 +453,29 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.16.0
+
+  /@openpanel/nextjs@0.0.10-beta(next@14.0.4)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-sPR0ctTVnSfSXx2kaXBNyEfDRzwXc61L+pRR2HoQHWOJSYj69GwDjDUcIHM1FDPyMRrHYYDlihCPYVKUCB9LoA==}
+    peerDependencies:
+      next: ^12.0.0 || ^13.0.0 || ^14.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@openpanel/web': 0.0.9-beta
+      next: 14.0.4(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@openpanel/sdk@0.0.9-beta:
+    resolution: {integrity: sha512-AjTpynr5wwN7qca7bQcHfV2Z9zZaCCK4mA+JIXO1LznoR6hLhnbkK91FbNN8jRFRD+2fPTcTAxG0YZlelAjdyw==}
+    dev: false
+
+  /@openpanel/web@0.0.9-beta:
+    resolution: {integrity: sha512-u08sYhjnI3aJYIQiBkHYQGJns8FwcQXKx+bNg0kM8tel7y2tD82E5veFdtbp7DSMvBANgpw/efS6PhYfEOjWhg==}
+    dependencies:
+      '@openpanel/sdk': 0.0.9-beta
+    dev: false
 
   /@prisma/adapter-libsql@5.10.2(@libsql/client@0.5.3):
     resolution: {integrity: sha512-XRaSK8IhmodBK3FAvlw0blwUVlIH9sEvUvJvHtGXKoMJDG9zb5HS/NkAqPVG7/8oqUZInZmdNlUXb/RGiROiFg==}

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.5.3",
+    "@openpanel/nextjs": "0.0.10-beta",
     "@prisma/adapter-libsql": "^5.10.2",
     "@prisma/client": "5.8.0",
     "@radix-ui/react-hover-card": "^1.0.7",
