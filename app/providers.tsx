@@ -25,10 +25,10 @@ export const Providers = ({ children }: Props) => {
         }}
       />
       <Analytics />
-      {process.env.OPENPANEL_CLIENT_ID && (
+      {process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID && (
         <OpenpanelProvider
           url="/api/op"
-          clientId={process.env.OPENPANEL_CLIENT_ID}
+          clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID}
           trackScreenViews={true}
           trackAttributes={true}
           trackOutgoingLinks={true}
