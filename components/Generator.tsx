@@ -42,17 +42,6 @@ export const Generator = ({
     setImageUrl(undefined)
     setStartedGenerationAt(new Date())
 
-    // If Openpanel is enabled, track the event
-    if (process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
-      trackEvent('generated_poster', {
-        url: url,
-      })
-      regenerationKey &&
-        trackEvent('regenerated_poster', {
-          url: url,
-        })
-    }
-
     const res = await fetch('/api/generatePoster', {
       method: 'POST',
       body: JSON.stringify({ url, regenerationKey }),
@@ -80,6 +69,17 @@ export const Generator = ({
       setImageUrl(imageUrl)
 
       if (resJson.regenerationKey) {
+        // If Openpanel is enabled, track the event
+        if (process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
+          trackEvent('generated_poster', {
+            url: url,
+          })
+          regenerationKey &&
+            trackEvent('regenerated_poster', {
+              url: url,
+            })
+        }
+
         toast.success(
           "Successfully generated the poster. If you don't like it, feel free to regenerate it.",
           {
