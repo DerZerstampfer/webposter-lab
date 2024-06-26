@@ -43,7 +43,7 @@ export const Generator = ({
     setStartedGenerationAt(new Date())
 
     // If Openpanel is enabled, track the event
-    if (process.env.OPENPANEL_CLIENT_ID) {
+    if (process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID) {
       trackEvent('generated_poster', {
         url: url,
       })
